@@ -1,0 +1,248 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.OracleClient;
+using System.Configuration;
+using System.Net.Mail;
+
+
+namespace WindowsFormsApplication1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+
+                this.WindowState = FormWindowState.Minimized;
+
+                notifyIcon1.BalloonTipText = "Application Minimized.";
+                notifyIcon1.BalloonTipTitle = "IBT-Application Minimized";
+
+                ShowInTaskbar = false;
+                notifyIcon1.Visible = true;
+                notifyIcon1.ShowBalloonTip(10);
+
+                CommonClass.CommonFunctions clsCommon = new CommonClass.CommonFunctions();
+                clsCommon.Logger(System.Reflection.MethodBase.GetCurrentMethod().Name, "*************** Application Started at " + DateTime.Now +  " ***************");
+            }
+            catch (Exception ex)
+            {
+                CommonClass.CommonFunctions clsCommon = new CommonClass.CommonFunctions();
+                clsCommon.Logger(System.Reflection.MethodBase.GetCurrentMethod().Name, ex.InnerException.ToString());
+                throw;
+            }
+
+        }
+
+        private void BatchProcessLife()
+        {
+            try
+            {
+                CommonClass.ClsBatches clsBatch = new CommonClass.ClsBatches();
+                clsBatch.LifeBatchRun();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        private void BatchProcessGeneral()
+        {
+            try
+            {
+                CommonClass.ClsBatches clsBatch = new CommonClass.ClsBatches();
+                clsBatch.GeneralBatchRun();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void BatchProcessNonTCS()
+        {
+            try
+            {
+                CommonClass.ClsBatches clsBatch = new CommonClass.ClsBatches();
+                clsBatch.NonTCSBatchRun();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void TCSReversedFeedBack()
+        {
+            try
+            {
+                CommonClass.ClsBatches clsBatch = new CommonClass.ClsBatches();
+                clsBatch.TCSReversedFeedBack();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void cmdExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        public void SetTimeInterval()
+        {
+            string myConn = ConfigurationManager.ConnectionStrings["ORAWF"].ToString();
+
+            OracleConnection conn = new OracleConnection(myConn);
+            conn.Open();
+
+
+                OracleCommand cmd_get_roleID = conn.CreateCommand();
+                cmd_get_roleID.CommandText = " SELECT SUM(C) FROM " +
+                                             " ( " +
+                                             " select count(L.SERIAL) AS C from FAS_IBT_TEMP_RECEIPT_LI L  " +
+                                             " WHERE L.BATCH_STATUS = 'UPLOADED' AND L.BATCH_NO =  (SELECT DISTINCT L1.BATCH_NO " +
+                                             "                                      FROM  FAS_IBT_TEMP_RECEIPT_LI L1 " +
+                                             "                                      WHERE L1.BATCH_STATUS = 'UPLOADED' " +
+                                             "                                      AND L1.BATCH_NO = (SELECT MIN(K.BATCH_NO) FROM  FAS_IBT_TEMP_RECEIPT_LI K WHERE K.batch_status = 'UPLOADED')) " +
+                                             " UNION " +
+                                             " select count(G.SERIAL) AS C from FAS_IBT_TEMP_RECEIPT_GI G  " +
+                                             " WHERE G.BATCH_STATUS = 'UPLOADED' AND G.BATCH_NO =  (SELECT DISTINCT G1.BATCH_NO " +
+                                             "                                     FROM  FAS_IBT_TEMP_RECEIPT_GI G1 " +
+                                             "                                     WHERE G1.BATCH_STATUS = 'UPLOADED' " +
+                                             "                                     AND G1.BATCH_NO = (SELECT MIN(K1.BATCH_NO) FROM  FAS_IBT_TEMP_RECEIPT_GI K1 WHERE K1.batch_status = 'UPLOADED'))" +
+                                             "" +
+                                             " UNION " +
+                                             " select count(N.SERIAL) AS C from FAS_IBT_TEMP_RECEIPT_NT N " +
+                                             " WHERE N.BATCH_STATUS = 'UPLOADED' AND N.BATCH_NO = (SELECT DISTINCT N1.BATCH_NO " +
+                                             " FROM  FAS_IBT_TEMP_RECEIPT_NT N1 " +
+                                             " WHERE N1.BATCH_STATUS = 'UPLOADED' " +
+                                             " AND N1.BATCH_NO = (SELECT MIN(K2.BATCH_NO) FROM  FAS_IBT_TEMP_RECEIPT_NT K2 WHERE K2.batch_status = 'UPLOADED')))";
+
+
+
+
+
+                OracleDataReader odr_get_role_id = cmd_get_roleID.ExecuteReader();
+
+                odr_get_role_id.Read();
+
+                //while (odr_get_role_id.Read())
+                //{
+                    string receiptCount = odr_get_role_id[0].ToString();
+
+                    //conn.Close();
+
+                    string Interval = "0";
+
+
+                    if (Convert.ToDouble(receiptCount) < 10)
+                    {
+                        Interval = "30000";
+                    }
+                    else if (Convert.ToDouble(receiptCount) < 100)
+                    {
+                        Interval = "90000";
+                    }
+                    else if (Convert.ToDouble(receiptCount) < 300)
+                    {
+                        Interval = "120000";
+                    }
+                    else if (Convert.ToDouble(receiptCount) < 500)
+                    {
+                        Interval = "200000";
+                    }
+                    else if (Convert.ToDouble(receiptCount) > 500)
+                    {
+                        Interval = "300000";
+                    }
+
+                    timer1.Interval = Convert.ToInt32(Interval);
+
+                    CommonClass.CommonFunctions clsCommon = new CommonClass.CommonFunctions();
+
+                    clsCommon.LoggerTimerInterval("  receiptCount - " + receiptCount, "  Time Interval - " + Interval);
+                //}
+
+                conn.Close();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            SetTimeInterval();
+
+            try
+            {
+
+
+                CommonClass.CommonFunctions clsCommon = new CommonClass.CommonFunctions();
+                clsCommon.Logger(System.Reflection.MethodBase.GetCurrentMethod().Name, "Batch Process Started--------------------");
+
+                BatchProcessLife();
+                clsCommon.Logger(System.Reflection.MethodBase.GetCurrentMethod().Name, "-Life Batch Done");
+
+                BatchProcessGeneral();
+                clsCommon.Logger(System.Reflection.MethodBase.GetCurrentMethod().Name, "-General Batch Done");
+
+                BatchProcessNonTCS();
+                clsCommon.Logger(System.Reflection.MethodBase.GetCurrentMethod().Name, "-NonTCS Batch Done");
+
+                TCSReversedFeedBack();
+                clsCommon.Logger(System.Reflection.MethodBase.GetCurrentMethod().Name, "-TCS Reversed Feedback Done");
+
+
+            }
+            catch (Exception ex)
+            {
+                CommonClass.CommonFunctions clsCommon = new CommonClass.CommonFunctions();
+                clsCommon.Logger(System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message.ToString());
+
+                CommonClass.ClsEmail clsEmail = new CommonClass.ClsEmail();
+                clsEmail.ErrorNotifyEmail(ex);
+                //Error Email/SMS Auto Generate
+            }
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                ShowInTaskbar = false;
+                notifyIcon1.Visible = true;
+                notifyIcon1.ShowBalloonTip(1000);
+            }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ShowInTaskbar = true;
+            notifyIcon1.Visible = false;
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            ShowInTaskbar = true;
+            notifyIcon1.Visible = false;
+            WindowState = FormWindowState.Normal;
+        }
+
+    }
+}

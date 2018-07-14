@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+  </configSections>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
+  </startup>
+
+
+  <connectionStrings>
+    
+    
+    <add name="ORAWF" connectionString="Data Source=RACPROD;User ID=hnba_crc;Password=HNBACRC"
+      providerName="System.Data.OracleClient" />
+
+    <add name="ORAWF_ACC" connectionString="Data Source=RACPROD;User ID=iims_acc;Password=iims"
+      providerName="System.Data.OracleClient" />
+
+    <add name="sqlconnForMRP" connectionString="Data Source=192.168.10.12;Initial Catalog=MRP; User ID=manual_debit;Password=prodsql@2011"
+      providerName="System.Data.OracleClient" />
+
+    <add name="sqlconn" connectionString="Data Source=192.168.10.12;Initial Catalog=AD_AUTH_DB; User ID=manual_debit;Password=prodsql@2011"
+      providerName="System.Data.OracleClient" />
+
+    <!--<add name="WindowsFormsApplication1.Properties.Settings.Test78ConnectionString"
+      connectionString="Data Source=PRODDB78;User ID=hnba_crc;Password=HNBACRC;Unicode=True"
+      providerName="System.Data.OracleClient" />-->
+  </connectionStrings>
+
+
+
+</configuration>

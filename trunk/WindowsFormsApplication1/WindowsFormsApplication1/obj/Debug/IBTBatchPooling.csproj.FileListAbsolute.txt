@@ -1,0 +1,26 @@
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.manifest
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.application
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\IBTBatchPooling.csproj.GenerateResource.Cache
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe.manifest
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.application
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+F:\PROJECTS-HNBA\IBT-Email-LIFE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\IBTBatchPooling.csprojResolveAssemblyReference.cache
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.manifest
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.application
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\IBTBatchPooling.csprojResolveAssemblyReference.cache
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\IBTBatchPooling.csproj.GenerateResource.Cache
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe.manifest
+D:\HNBA PROJECTS\IBT Batch Pooling\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.application
